@@ -157,7 +157,6 @@ class GameForm: Form
 		if(mysock)
 		{
 			mysock.close();
-			dfl.socket.unregisterEvent(mysock);
 			mysock = null;
 		}
 		
@@ -305,11 +304,14 @@ class GameForm: Form
 							status.text = "Tie game!";
 							disableGame();
 							break;
+						default:
+							break;
 					}
 				}
 				break;
 			
-			default: ;
+			default: 
+				break;
 		}
 	}
 }
@@ -317,7 +319,7 @@ class GameForm: Form
 
 int main()
 {
-	Application.run(new GameForm);
+	Application.run(new GameForm());
 	return 0;
 }
 

@@ -44,7 +44,8 @@ extern(Windows) BOOL DllMain(HINSTANCE hInstance, ULONG ulReason, LPVOID pvReser
 		case DLL_THREAD_DETACH:
 			return false; // No multiple threads.
 		
-		default: ;
+		default: 
+			break;
 	}
 	return true;
 }

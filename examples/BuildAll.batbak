@@ -1,5 +1,5 @@
 @cls
-set PATH=c:\D\dmd2\windows\bin;c:\D\dm\bin;
+set PATH=d:\D\dmd2\windows\bin;d:\D\dm\bin;
 
 dfl -release beginner.d -gui
 dfl -release charformat -gui
@@ -36,7 +36,8 @@ dfl -release scroller -gui
 dfl -release regextester -gui
 dfl -release listviewdirsort -gui
 dfl -release status -gui
-
+dfl -release dlltest.d dlltest.def 
+dfl -release toolbar toolbar.res -gui
 
 dfl -debug -ofbeginner_debug.exe beginner.d -gui
 dfl -debug -ofcharformat_debug.exe charformat -gui

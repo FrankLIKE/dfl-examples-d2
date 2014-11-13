@@ -25,8 +25,8 @@ RegistryKey rkey;
 
 class DNoteForm: Form
 {
-	const string UNTITLED = "Untitled";
-	const string FILE_DIALOG_FILTER = "Text Documents (*.txt)|*.txt|D Source Files (*.d)|*.d|All Files|*.*";
+	static	const string UNTITLED = "Untitled";
+	static	const string FILE_DIALOG_FILTER = "Text Documents (*.txt)|*.txt|D Source Files (*.d)|*.d|All Files|*.*";
 	
 	DNoteTextBox pad; // The note pad.
 	string fileName;
@@ -542,7 +542,6 @@ class DNoteForm: Form
 // add default
 				default:
 					assert(0);
-					break;
 			}
 			
 			pad.text = text;
@@ -611,7 +610,6 @@ class DNoteForm: Form
 // add default
 				default:
 					assert(0);
-					break;
 		}
 		
 		BufferedFile _f;
@@ -658,8 +656,7 @@ class DNoteForm: Form
 			// add default
 				default:
 					assert(0);
-					break;
-}
+			}
 		}
 		finally
 		{
@@ -670,7 +667,7 @@ class DNoteForm: Form
 	}
 	
 	
-	bool canContinue() // getter
+	@property bool canContinue() // getter
 	{
 		if(isUntitled && !pad.textLength)
 			return true;
@@ -694,8 +691,7 @@ class DNoteForm: Form
 			// add default
 				default:
 					assert(0);
-					break;
-}
+			}
 		}
 		
 		return true;

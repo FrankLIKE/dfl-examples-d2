@@ -263,7 +263,8 @@ class MainForm: Form
 					msgBox(this, "Connection closed");
 				break;
 			
-			default: ;
+			default: 
+				break;
 		}
 	}
 	
@@ -426,7 +427,8 @@ class MainForm: Form
 							}
 							break;
 						
-						default: ;
+						default: 
+							break;
 					}
 				}
 			}

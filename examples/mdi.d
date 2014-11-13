@@ -55,7 +55,7 @@ class MainForm: Form
 		Form f;
 		with(f = new Form)
 		{
-			text = "MDI child #" ~ std.conv.to!string(++docnum) ~ "/" ~ std.conv.to!string(this.mdiChildren.length + 1);
+			text = "MDI child #" ~ std.conv.to!string(++docnum) ~ "/" ~ std.conv.to!string(this.mdiChildren().length + 1);
 			mdiParent = this;
 			
 			with(new Button)

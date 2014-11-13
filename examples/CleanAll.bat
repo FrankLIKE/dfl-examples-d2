@@ -3,4 +3,5 @@
 @echo About to delete exe files;
 @pause
 @del *.exe
+@del *.json
 

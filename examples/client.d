@@ -20,9 +20,9 @@ string nuser, npass;
 
 class ClientForm: Form
 {
-	const int PADDING = 8;
-	const int TEXTBOX_HEIGHT = 20;
-	const int LABEL_HEIGHT = 16;
+	static const int PADDING = 8;
+	static const int TEXTBOX_HEIGHT = 20;
+	static const int LABEL_HEIGHT = 16;
 	
 	ListBox groups;
 	ListBox msgs;
@@ -276,7 +276,8 @@ class ClientForm: Form
 				
 				break;
 			
-			default: ;
+			default: 
+				break;
 		}
 	}
 }

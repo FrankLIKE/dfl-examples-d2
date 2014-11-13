@@ -68,7 +68,8 @@ int main()
 						f.opacity = 1;
 					break;
 				
-				default: ;
+				default: 
+					break;
 			}
 		};
 	}

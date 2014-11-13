@@ -18,51 +18,51 @@ import dfl.all;
 
 int main()
 {
-	printf("Exe = %.*s\nDir = %.*s\n", Application.executablePath, Application.startupPath);
-	printf("Operating system = %.*s\n", Environment.osVersion.toString());
-	printf("Machine name = %.*s\n", Environment.machineName);
-	printf("Command line = %.*s\n", Environment.commandLine);
-	printf("Current directory = %.*s\n", Environment.currentDirectory);
-	printf("System directory = %.*s\n", Environment.systemDirectory);
-	printf("User name = %.*s\n", Environment.userName);
-	printf("Tick count = %d\n", Environment.tickCount);
-	printf("%.*s\n", Environment.expandEnvironmentVariables("WINDIR environment variable = %WINDIR%"));
-	printf("PATH environment variable = %.*s\n", Environment.getEnvironmentVariable("PATH"));
+	writef("Exe = %.*s\nDir = %.*s\n", Application.executablePath, Application.startupPath);
+	writef("Operating system = %.*s\n", Environment.osVersion.toString());
+	writef("Machine name = %.*s\n", Environment.machineName);
+	writef("Command line = %.*s\n", Environment.commandLine);
+	writef("Current directory = %.*s\n", Environment.currentDirectory);
+	writef("System directory = %.*s\n", Environment.systemDirectory);
+	writef("User name = %.*s\n", Environment.userName);
+	writef("Tick count = %d\n", Environment.tickCount);
+	writef("%.*s\n", Environment.expandEnvironmentVariables("WINDIR environment variable = %WINDIR%"));
+	writef("PATH environment variable = %.*s\n", Environment.getEnvironmentVariable("PATH"));
 	
 	string[] drives = Environment.getLogicalDrives();
-	printf("%d logical drives:\n", drives.length);
+	writef("%d logical drives:\n", drives.length);
 	foreach(string s; drives)
 	{
-		printf("   %.*s\n", s);
+		writef("   %.*s\n", s);
 	}
 	
 	// Registry.
 	RegistryKey rkey;
 	
-	printf(`Creating key HKCU\Software\DFL Test...` "\n");
+	writef(`Creating key HKCU\Software\DFL Test...` "\n");
 	rkey = Registry.currentUser.createSubKey(`software\DFL Test`);
 	
-	printf("Key created; creating values...\n");
+	writef("Key created; creating values...\n");
 	rkey.setValue("str", "Hello, world");
 	rkey.setValue("num", 0xADEADF00);
 	rkey.setValue("dyn", 0x8A3);
 	rkey.setValue("DYn", 0x3AAA3);
 	rkey.setValue("zip", 0);
 	
-	printf("Closing and reopening key...\n");
+	writef("Closing and reopening key...\n");
 	rkey.close();
 	rkey = Registry.currentUser.openSubKey(`software\dfl test`);
 	
-	printf("Values are:\n");
+	writef("Values are:\n");
 	foreach(string name; rkey.getValueNames())
 	{
 		string val;
 		val = rkey.getValue(name).toString();
-		printf("\t%.*s = (len=%d) %.*s\n", name, val.length, val);
+		writef("\t%.*s = (len=%d) %.*s\n", name, val.length, val);
 	}
 	rkey.close();
 	
-	printf("Deleting key...\n");
+	writef("Deleting key...\n");
 	Registry.currentUser.deleteSubKey(`software\dfl test`);
 	
 	// Clipboard.
@@ -70,11 +70,11 @@ int main()
 	dobj = Clipboard.getDataObject();
 	if(dobj.getDataPresent(DataFormats.text))
 	{
-		printf("Text on the clipboard: '%.*s'\n", dobj.getData(DataFormats.text).getText());
+		writef("Text on the clipboard: '%.*s'\n", dobj.getData(DataFormats.text).getText());
 	}
 	else
 	{
-		printf("No text on the clipboard.\n");
+		writef("No text on the clipboard.\n");
 	}
 //@@	Clipboard.setDataObject(Data(cast(ubyte[])("Now: " ~ std.date.toString(getUTCtime()))));
 	Clipboard.setDataObject(Data(cast(ubyte[])("Now: " ~ Clock.currTime().toSimpleString())));
@@ -83,11 +83,11 @@ int main()
 	assert(dobj !is null);
 	if(dobj.getDataPresent(DataFormats.text))
 	{
-		printf("Text on the clipboard: '%.*s'\n", dobj.getData(DataFormats.text).getText());
+		writef("Text on the clipboard: '%.*s'\n", dobj.getData(DataFormats.text).getText());
 	}
 	else
 	{
-		printf("No text on the clipboard.\n");
+		writef("No text on the clipboard.\n");
 	}
 	
 	// Now try setting an entire data object on the clipboard.
@@ -97,7 +97,7 @@ int main()
 	d.setData(Data("Yeehaw!"));
 	Clipboard.setDataObject(Data(d), true);
 	
-	printf("Done.\n");
+	writef("Done.\n");
 	
 	try
 	{
@@ -113,7 +113,7 @@ int main()
 		f.backColor = Color(22, 66, 202);
 		f.visibleChanged ~= delegate(Object sender, EventArgs ea)
 		{
-			printf("f.visibleChanged; visible = %.*s\n", f.visible ? "true" : "false");
+			writef("f.visibleChanged; visible = %.*s\n", f.visible ? "true" : "false");
 		};
 		f.enabledChanged ~= delegate(Object sender, EventArgs ea)
 		{
@@ -122,7 +122,7 @@ int main()
 			else
 				f.text = ftext ~ " [disabled]";
 			
-			printf("f.enabledChanged; enabled = %.*s\n", f.enabled ? "true" : "false");
+			writef("f.enabledChanged; enabled = %.*s\n", f.enabled ? "true" : "false");
 		};
 		
 		
@@ -160,7 +160,6 @@ int main()
 				// add default
 					default:
 						assert(0);
-						break;
 				}
 			};
 		
@@ -246,8 +245,7 @@ int main()
 				
 				case 'C':
 					throw new Exception("Test exception.");
-					break;
-				
+ 
 				case 'N':
 					f.opacity = f.opacity - 0.1;
 					break;
@@ -385,7 +383,8 @@ int main()
 					f.windowState = FormWindowState.MINIMIZED;
 					break;
 				
-				default: ;
+				default: 
+					break;
 			}
 		}
 		f.keyPress ~= &key;
@@ -395,7 +394,7 @@ int main()
 	}
 	catch(DflThrowable o)
 	{
-		printf("Caught error: %.*s", o.toString());
+		writef("Caught error: %.*s", o.toString());
 	}
 	
 	printf("Bye!\n");
