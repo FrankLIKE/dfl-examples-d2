@@ -4,4 +4,5 @@
 @pause
 @del *.exe
 @del *.json
+@del *.dll
 
